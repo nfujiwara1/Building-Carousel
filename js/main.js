@@ -64,10 +64,51 @@ previousButton.addEventListener('click', function(e){
   previousDot.classList.add('is-selected')
 })
 
-dots.forEach(function(dot){
-  dot.addEventListener('click', function(e){
-    console.log(dot)
-    let clickedDotIndex
+// dots.forEach(function(dot){
+//   dot.addEventListener('click', function(e){
+//     console.log(dot)
+//     let clickedDotIndex
+//     for(let i = 0; i<dots.length; i++ ){
+//       if(dots[i] === dot){
+//         clickedDotIndex = i
+//       }
+//     }
+//     // console.log(clickedDotIndex)
+//     const slideToShow = slides[clickedDotIndex]
+//     // console.log(slideToShow)
+//     const destination = getComputedStyle(slideToShow).left
+//     // console.log(destination)
+
+//     contents.style.left = `-${destination}`
+//     slides.forEach(function(slide){
+//       slide.classList.remove('is-selected')
+//     })
+//     slideToShow.classList.add('is-selected')
+
+//     dots.forEach(function(d){
+//       d.classList.remove('is-selected')
+//     })
+//     dot.classList.add('is-selected')
+
+//     if(clickedDotIndex === 0){
+//       previousButton.setAttribute('hidden', true)
+//       nextButton.removeAttribute('hidden')
+//     }else if(clickedDotIndex === dots.length -1){
+//       previousButton.removeAttribute('hidden')
+//       nextButton.setAttribute('hidden', true)
+//     }else {
+//       previousButton.removeAttribute('hidden')
+//       nextButton.removeAttribute('hidden')
+//     }
+    
+//   })
+// })
+
+// Event Delegation
+dotsContainer.addEventListener('click', function(e){
+  const dot = e.target.closest('button')
+  if(dot){
+        let clickedDotIndex
     for(let i = 0; i<dots.length; i++ ){
       if(dots[i] === dot){
         clickedDotIndex = i
@@ -100,6 +141,5 @@ dots.forEach(function(dot){
       previousButton.removeAttribute('hidden')
       nextButton.removeAttribute('hidden')
     }
-    
-  })
+  }
 })
