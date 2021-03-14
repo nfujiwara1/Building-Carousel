@@ -26,7 +26,8 @@ nextButton.addEventListener('click',e=>{
   const destination = getComputedStyle(nextSlide).left
   // console.log(destination)
 
-  contents.style.left = `-${destination}`
+  // contents.style.left = `-${destination}`
+  contents.style.transform = 'translateX(-' + destination + ')'
   currentSlide.classList.remove('is-selected')
   nextSlide.classList.add('is-selected')
 
@@ -48,7 +49,8 @@ previousButton.addEventListener('click', function(e){
   // console.log(previousSlide)
   const destination = getComputedStyle(previousSlide).left
 
-  contents.style.left = `-${destination}`
+  // contents.style.left = `-${destination}`
+  contents.style.transform = 'translateX(-' + destination + ')'
   currentSlide.classList.remove('is-selected')
   previousSlide.classList.add('is-selected')
 
@@ -120,7 +122,8 @@ dotsContainer.addEventListener('click', function(e){
     const destination = getComputedStyle(slideToShow).left
     // console.log(destination)
 
-    contents.style.left = `-${destination}`
+    // contents.style.left = `-${destination}`
+    contents.style.transform = 'translateX(-' + destination + ')'
     slides.forEach(function(slide){
       slide.classList.remove('is-selected')
     })
