@@ -4,8 +4,10 @@ const previousButton = carousel.querySelector('.previous-button')
 const nextButton = carousel.querySelector('.next-button')
 const contents = carousel.querySelector('.carousel__contents')
 
-const dots = carousel.querySelectorAll('.carousel__dot')
-const slides = carousel.querySelectorAll('.carousel__slide')
+const dots = [...carousel.querySelectorAll('.carousel__dot')]
+const slides = [...carousel.querySelectorAll('.carousel__slide')]
+// const dots = carousel.querySelectorAll('.carousel__dot')
+// const slides = carousel.querySelectorAll('.carousel__slide')
 const dotsContainer = carousel.querySelector('.carousel__dots')
 
 const rect = slides[0].getBoundingClientRect()
@@ -27,7 +29,8 @@ nextButton.addEventListener('click',e=>{
   // console.log(destination)
 
   // contents.style.left = `-${destination}`
-  contents.style.transform = 'translateX(-' + destination + ')'
+  contents.style.transform = `translateX(-${destination})`
+  // contents.style.transform = 'translateX(-' + destination + ')'
   currentSlide.classList.remove('is-selected')
   nextSlide.classList.add('is-selected')
 
@@ -109,14 +112,19 @@ previousButton.addEventListener('click', function(e){
 // Event Delegation
 dotsContainer.addEventListener('click', function(e){
   const dot = e.target.closest('button')
-  if(dot){
-        let clickedDotIndex
-    for(let i = 0; i<dots.length; i++ ){
-      if(dots[i] === dot){
-        clickedDotIndex = i
-      }
-    }
+  if(!dot) return
+  const clickedDotIndex = dots.findIndex(d=>
+     d === dot
+  )
+  
+  // let clickedDotIndex
+    // for(let i = 0; i<dots.length; i++ ){
+    //   if(dots[i] === dot){
+    //     clickedDotIndex = i
+    //   }
+    // }
     // console.log(clickedDotIndex)
+    
     const slideToShow = slides[clickedDotIndex]
     // console.log(slideToShow)
     const destination = getComputedStyle(slideToShow).left
@@ -144,5 +152,45 @@ dotsContainer.addEventListener('click', function(e){
       previousButton.removeAttribute('hidden')
       nextButton.removeAttribute('hidden')
     }
-  }
+  
 })
+
+// dotsContainer.addEventListener('click', function(e){
+//   const dot = e.target.closest('button')
+//   if(dot){
+//         let clickedDotIndex
+//     for(let i = 0; i<dots.length; i++ ){
+//       if(dots[i] === dot){
+//         clickedDotIndex = i
+//       }
+//     }
+//     // console.log(clickedDotIndex)
+//     const slideToShow = slides[clickedDotIndex]
+//     // console.log(slideToShow)
+//     const destination = getComputedStyle(slideToShow).left
+//     // console.log(destination)
+
+//     // contents.style.left = `-${destination}`
+//     contents.style.transform = 'translateX(-' + destination + ')'
+//     slides.forEach(function(slide){
+//       slide.classList.remove('is-selected')
+//     })
+//     slideToShow.classList.add('is-selected')
+
+//     dots.forEach(function(d){
+//       d.classList.remove('is-selected')
+//     })
+//     dot.classList.add('is-selected')
+
+//     if(clickedDotIndex === 0){
+//       previousButton.setAttribute('hidden', true)
+//       nextButton.removeAttribute('hidden')
+//     }else if(clickedDotIndex === dots.length -1){
+//       previousButton.removeAttribute('hidden')
+//       nextButton.setAttribute('hidden', true)
+//     }else {
+//       previousButton.removeAttribute('hidden')
+//       nextButton.removeAttribute('hidden')
+//     }
+//   }
+// })
